@@ -1,4 +1,4 @@
-PROJECT(homework1)
+project(homework1)
 
 set(CXX_STANDARD 14)
 
