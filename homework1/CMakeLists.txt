@@ -1,7 +1,4 @@
 project(homework1)
-
-set(CXX_STANDARD 14)
-
 add_executable(homework1 main.cpp)
 add_custom_command(TARGET homework1 POST_BUILD
   COMMAND ${CMAKE_COMMAND} -E copy
