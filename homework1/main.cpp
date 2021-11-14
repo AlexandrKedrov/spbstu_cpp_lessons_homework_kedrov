@@ -44,11 +44,11 @@ findLeftRightMost(
 		const IteratorType value =
 			comparator(xnNormalized, ynNormalized, xValue, yValue);
 
-		if (value > maxValue) {
+		if (value >= maxValue) {
 			maxValue = value;
 			xMax = xValue;
 			yMax = yValue;
-		} else if (value < minValue) {
+		} else if (value <= minValue) {
 			minValue = value;
 			xMin = xValue;
 			yMin = yValue;
