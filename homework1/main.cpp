@@ -11,7 +11,7 @@ namespace
 // first two args stand for xn, yn
 // next two args stand for xi, yi
 template <typename T>
-using Comparator = std::function<T(T, T, T, T)>;
+using Comparator = std::function<T(T xn, T yn, T x, T y)>;
 
 template <typename Iterator>
 std::array<typename std::iterator_traits<Iterator>::value_type, 4>
@@ -91,8 +91,8 @@ int main() {
 	std::istream_iterator<float> end;
 
 	const std::array<float, 4> result = findLeftRightMost(begin, end, compareByAngle);
-	std::cout << "Leftmost: " << result.at(2) << " " << result.at(3) << std::endl;
-	std::cout << "Rightmost: " << result.at(0) << " " << result.at(1) << std::endl;
+	std::cout << "Leftmost: " << std::lround(result.at(2)) << " " << std::lround(result.at(3)) << std::endl;
+	std::cout << "Rightmost: " << std::lround(result.at(0)) << " " << std::lround(result.at(1)) << std::endl;
 
 	return 0;
 }
