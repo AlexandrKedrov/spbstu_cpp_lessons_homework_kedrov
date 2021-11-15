@@ -36,12 +36,7 @@ findLeftRightMost(
 	IteratorType maxValue = 0; // stands for rightest
 	IteratorType minValue = 0; // stands for leftest
 
-	IteratorType xMax, yMax, xMin, yMin;
-
-	if(it == end)
-	{
-		return {0, 0, 0, 0};
-	}
+	IteratorType xMax = 0, yMax = 0, xMin = 0, yMin = 0;
 
 	while (it != end) {
 		const IteratorType xValue = *(it++);
