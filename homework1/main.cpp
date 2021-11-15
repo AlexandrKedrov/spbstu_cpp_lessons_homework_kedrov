@@ -88,10 +88,17 @@ float compareByDistance(float xn, float yn, float x, float y) {
 
 int main() {
 	std::ifstream inputFile("in.txt");
-	std::istream_iterator<float> begin(inputFile);
-	std::istream_iterator<float> end;
+	std::vector<float> data;
+	data.reserve(1 << 19);
 
-	const std::vector<float> data(begin, end);
+
+	float x1, x2;
+	while (inputFile >> x1 >> x2)
+	{
+		data.push_back(x1);
+		data.push_back(x2);
+	}
+	
 
 	const std::array<float, 4> result = findLeftRightMost(data.cbegin(), data.cend(), compareByAngle);
 	std::cout << "Leftmost: " << std::lround(result.at(2)) << " " << std::lround(result.at(3)) << std::endl;
