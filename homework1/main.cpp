@@ -1,3 +1,4 @@
+#include <vector>
 #include <array>
 #include <cmath>
 #include <fstream>
@@ -37,6 +38,11 @@ findLeftRightMost(
 
 	IteratorType xMax, yMax, xMin, yMin;
 
+	if(it == end)
+	{
+		return {0, 0, 0, 0};
+	}
+
 	while (it != end) {
 		const IteratorType xValue = *(it++);
 		const IteratorType yValue = *(it++);
@@ -68,7 +74,7 @@ float compareByAngle(float xn, float yn, float x, float y) {
 	// so flip the sign in the end
 	const float sin = xn * yNormalized - yn * xNormalized;
 	// dot product for cos of angle
-	const float cos = xn * yNormalized + yn * yNormalized;
+	const float cos = xn * xNormalized + yn * yNormalized;
 	// blunt angles are right and left most so substract 1
 
 	return -sin >= 0.f ? -(cos - 1.f) : cos - 1.f;
@@ -90,7 +96,9 @@ int main() {
 	std::istream_iterator<float> begin(inputFile);
 	std::istream_iterator<float> end;
 
-	const std::array<float, 4> result = findLeftRightMost(begin, end, compareByAngle);
+	const std::vector<float> data(begin, end);
+
+	const std::array<float, 4> result = findLeftRightMost(data.cbegin(), data.cend(), compareByAngle);
 	std::cout << "Leftmost: " << std::lround(result.at(2)) << " " << std::lround(result.at(3)) << std::endl;
 	std::cout << "Rightmost: " << std::lround(result.at(0)) << " " << std::lround(result.at(1)) << std::endl;
 
