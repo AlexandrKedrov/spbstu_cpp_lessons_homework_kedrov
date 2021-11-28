@@ -59,48 +59,42 @@ findLeftRightMost(
 	return {xMax, yMax, xMin, yMin};
 }
 
-float compareByAngle(float xn, float yn, float x, float y) {
-	const float length = std::sqrt(x * x + y * y);
-	const float xNormalized = x / length;
-	const float yNormalized = y / length;
+template <typename T> 
+T compareByAngle(T xn, T yn, T x, T y) {
+  const T length = std::sqrt(x * x + y * y);
+  const T xNormalized = x / length;
+  const T yNormalized = y / length;
 
-	// use cross product to find sin of angle
-	// positive if counter-clockwise, negative if clockwise rotation
-	// so flip the sign in the end
-	const float sin = xn * yNormalized - yn * xNormalized;
-	// dot product for cos of angle
-	const float cos = xn * xNormalized + yn * yNormalized;
-	// blunt angles are right and left most so substract 1
+  // use cross product to find sin of angle
+  // positive if counter-clockwise, negative if clockwise rotation
+  // so flip the sign in the end
+  const T sin = xn * yNormalized - yn * xNormalized;
+  // dot product for cos of angle
+  const T cos = xn * xNormalized + yn * yNormalized;
+  // blunt angles are right and left most so substract 1
 
-	return -sin >= 0.f ? -(cos - 1.f) : cos - 1.f;
+  return -sin >= 0 ? -(cos - 1) : cos - 1;
 }
 
-float compareByDistance(float xn, float yn, float x, float y) {
-	// Use cross product to find area
-	// As direction normalized it will be equal to distance from direction to
-	// point positive if counter-clockwise, negative if clockwise rotation so flip
-	// the sign in the end
-	const float area = xn * y - yn * x;
+template <typename T> 
+T compareByDistance(T xn, T yn, T x, T y) {
+  // Use cross product to find area
+  // As direction normalized it will be equal to distance from direction to
+  // point positive if counter-clockwise, negative if clockwise rotation so flip
+  // the sign in the end
+  const T area = xn * y - yn * x;
 
-	return -area;
+  return -area;
 }
 }
 
 int main() {
 	std::ifstream inputFile("in.txt");
-	std::vector<float> data;
-	data.reserve(1 << 19);
 
+	std::istream_iterator<double> begin(inputFile);
+	std::istream_iterator<double> end;
 
-	float x1, x2;
-	while (inputFile >> x1 >> x2)
-	{
-		data.push_back(x1);
-		data.push_back(x2);
-	}
-	
-
-	const std::array<float, 4> result = findLeftRightMost(data.cbegin(), data.cend(), compareByAngle);
+	const std::array<double, 4> result = findLeftRightMost(begin, end, compareByAngle<double>);
 	std::cout << "Leftmost: " << std::lround(result.at(2)) << " " << std::lround(result.at(3)) << std::endl;
 	std::cout << "Rightmost: " << std::lround(result.at(0)) << " " << std::lround(result.at(1)) << std::endl;
 
