@@ -73,7 +73,7 @@ T compareByAngle(T xn, T yn, T x, T y) {
   const T cos = xn * xNormalized + yn * yNormalized;
   // blunt angles are right and left most so substract 1
 
-  return -sin >= 0 ? -(cos - 1) : cos - 1;
+  return -sin >= 0 ? -(cos - 1.1) : cos - 1.1;
 }
 
 template <typename T> 
