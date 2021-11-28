@@ -9,6 +9,9 @@
 
 namespace
 {
+
+const double epsilon = 1e-15;
+
 // first two args stand for xn, yn
 // next two args stand for xi, yi
 template <typename T>
@@ -44,12 +47,14 @@ findLeftRightMost(
 
 		const IteratorType value =
 			comparator(xnNormalized, ynNormalized, xValue, yValue);
+		const IteratorType maxDif = value - maxValue;
+		const IteratorType minDif = value - minValue;
 
-		if (value >= maxValue) {
+		if (std::fabs(maxDif) < epsilon || maxDif > 0) {
 			maxValue = value;
 			xMax = xValue;
 			yMax = yValue;
-		} else if (value <= minValue) {
+		} else if (std::fabs(minDif) < epsilon || minDif < 0) {
 			minValue = value;
 			xMin = xValue;
 			yMin = yValue;
@@ -73,7 +78,7 @@ T compareByAngle(T xn, T yn, T x, T y) {
   const T cos = xn * xNormalized + yn * yNormalized;
   // blunt angles are right and left most so substract 1
 
-  return -sin >= 0 ? -(cos - 1.1) : cos - 1.1;
+  return std::fabs(sin) < epsilon || -sin > 0 ? -(cos - 1.1) : cos - 1.1;
 }
 
 template <typename T> 
