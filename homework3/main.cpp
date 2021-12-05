@@ -74,11 +74,11 @@ public:
 
 Vector ch_line(std::vector<Vector>& points)
 {
-	Vector a = points[1];
-	Vector b = points[0];
+	const Vector a = points[1];
+	const Vector b = points[0];
 
-	Vector ab = b - a;
-	Vector ao = -a;
+	const Vector ab = b - a;
+	const Vector ao = -a;
 
 	if(ab.dot(ao) > 0)
 	{
@@ -92,13 +92,13 @@ Vector ch_line(std::vector<Vector>& points)
 
 std::pair<Vector, bool> ch_triangle(std::vector<Vector>& points)
 {
-	Vector a = points[2];
-	Vector b = points[1];
-	Vector c = points[0];
+	const Vector a = points[2];
+	const Vector b = points[1];
+	const Vector c = points[0];
 
-	Vector ab = b - a;
-	Vector ac = c - a;
-	Vector ao = -a;
+	const Vector ab = b - a;
+	const Vector ac = c - a;
+	const Vector ao = -a;
 
 	Vector abc = ab.cross(ac);
 
@@ -151,7 +151,7 @@ bool gjk(const ICollider &col1, const ICollider &col2) {
 		}
 		else
 		{
-			std::pair<Vector, bool> result = ch_triangle(simplex);
+			const std::pair<Vector, bool> result = ch_triangle(simplex);
 
 			if(result.second)
 			{
