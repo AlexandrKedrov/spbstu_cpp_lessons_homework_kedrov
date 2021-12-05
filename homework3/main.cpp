@@ -164,7 +164,7 @@ bool gjk(const ICollider &col1, const ICollider &col2) {
 }
 
 int main(int argc, char **argv) {
-    std::string filename;
+	std::string filename;
 	if (argc == 2) {
 		filename = argv[1];
 	} else {
